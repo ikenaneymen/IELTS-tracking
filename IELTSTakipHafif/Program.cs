@@ -10,8 +10,9 @@ using System.Text.RegularExpressions;
 const string TakipEdilecekSayfa =
     "http://prep.bilkent.edu.tr/ielts-kayit/";
 
-const string NtfyTopic =
-    "ielts-bizziko-1712260705";
+string ntfyTopic =
+    Environment.GetEnvironmentVariable("NTFY_TOPIC")
+    ?? "ielts-bizziko-1712260705";
 
 // 5 saniye
 TimeSpan kontrolAraligi =
@@ -122,7 +123,7 @@ while (true)
                 bool bildirimGonderildi =
                     await BildirimGonder(
                         httpClient,
-                        NtfyTopic,
+                        ntfyTopic,
                         $"Yeni Bilkent IELTS Sınavı — {kaynak}",
                         $"Eski sınav:\n" +
                         $"{oncekiSinav.Yazi}\n\n" +
